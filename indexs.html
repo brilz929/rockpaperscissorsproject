@@ -3,10 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
   <title>Rock Paper Scissors Game</title>
 </head>
 <body>
+  <h1>PLAY GAME</h1>
+  <div class="game-container" id="game-container">
+    <div class="player-section">
+      <p>PLAYER</p>
+      <div class="player-icon"></div>
+    </div>
 
+    <p>VS</p>
+    
+    <div class="computer-section">
+      <p>COMPUTER</p>
+      <div class="computer-icon"></div>
+    </div>
+  </div>
+    
+    <div class="button-section">
+      <button id="rock">ROCK</button>
+      <button id="paper">PAPER</button>
+      <button id="scissors">SCISSORS</button>
+    </div>
+    
+    <div class="result-section" id="result">
+      <p>SCORE:</p>
+      <p id="player-score">PLAYER: 0</p>
+      <p id="computer-score">COMPUTER: 0</p>
+    </div>
+    <button id="reset-btn" style="display: none;">PLAY AGAIN</button>
   <script src="index.js"></script>
 
 </body>

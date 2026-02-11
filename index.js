@@ -1,4 +1,23 @@
-    let choices = ["rock", "paper", "scissors"]
+    const rockButton = document.getElementById('rock');
+    const paperButton = document.getElementById('paper');
+    const scissorsButton = document.getElementById('scissors');
+    const playerIcon = document.querySelector('.player-icon');
+    const computerIcon = document.querySelector('.computer-icon');
+    const playerScoreEl = document.getElementById('player-score');
+    const computerScoreEl = document.getElementById('computer-score');
+    const titleHeader = document.querySelector('h1');
+    const resetBtn = document.getElementById('reset-btn');
+
+    let humanScore = 0;
+    let computerScore = 0;
+    let currentRound = 0;
+    let maxRounds = 5;
+    
+    let choices = [
+        { name: 'rock', emoji: '🪨', beats: 'scissors' },
+        { name: 'paper', emoji: '📄', beats: 'rock' },
+        { name: 'scissors', emoji: '✂️', beats: 'paper' }
+    ]
 
 
     function getComputerChoice() {
@@ -6,53 +25,63 @@
         return choices[randomIndex];
     }
 
-    function getHumanChoice() {
-        let choice = "";
-        while (!choices.includes(choice)) {
-            choice = prompt("Enter your choice (rock, paper, or scissors):").toLowerCase();
-            if (!choices.includes(choice)) {
-                alert("Invalid choice. Please try again.");
-            }
-        }
-        return choice;
-    }
+    function playRound(playerChoice) {
+       if (currentRound >= maxRounds) {
+        titleHeader.textContent = "Game over!";
+        return;
+       }
+        const computerChoice = getComputerChoice();
+        
+        playerIcon.textContent = playerChoice.emoji;
+        computerIcon.textContent = computerChoice.emoji;
 
-    function playRound(humanChoice, computerChoice) {
-        if (humanChoice === computerChoice) {
-            return "It's a tie!"
-        } else if ((humanChoice === "rock" && computerChoice === "scissors") ||
-                   (humanChoice === "paper" && computerChoice === "rock") ||
-                   (humanChoice === "scissors" && computerChoice === "paper")) {
-            return "You win this round!"
+        currentRound++;
+
+        if (playerChoice.name === computerChoice.name) {
+            titleHeader.textContent = `ROUND ${currentRound}: TIE!`;
+        } else if (playerChoice.beats === computerChoice.name) {
+            humanScore++;
+            titleHeader.textContent = `ROUND ${currentRound}: You win!`;
+            playerScoreEl.textContent = `PLAYER: ${humanScore}`;
         } else {
-            return "Computer wins this round!"
+            computerScore++;
+            titleHeader.textContent = `ROUND ${currentRound}: Computer wins!`;
+            computerScoreEl.textContent = `COMPUTER: ${computerScore}`;
         }
+
+        if (currentRound === maxRounds)
+            declareWinner()
+        
     }
 
-    function playGame() {
-        let humanScore = 0
-        let computerScore = 0
-
-        for (let round = 1; round <= 5; round++) {
-            const humanChoice = getHumanChoice();
-            const computerChoice = getComputerChoice();
-            const result = playRound(humanChoice, computerChoice);
-
-
-            console.log(`Round ${round}: You chose ${humanChoice}, Computer chose ${computerChoice}.`);
-            console.log(playRound(humanChoice, computerChoice));
-
-            if (result === "You win this round!") {
-                humanScore++;
-                // console.log("You win this round!");
-            } else if (result === "Computer wins this round!") {
-                computerScore++;
-                // console.log("Computer wins this round!");
-            } else {
-                // console.log("It's a tie!");
-            }
-        }
-        console.log(`Score - You: ${humanScore}, Computer: ${computerScore}`);
+    function declareWinner() {
+    if (humanScore > computerScore) {
+        titleHeader.textContent = "GAME OVER: YOU WIN!";
+        titleHeader.style.color = "gold";
+    } else if (computerScore > humanScore) {
+        titleHeader.textContent = "GAME OVER: COMPUTER WINS!";
+    } else {
+        titleHeader.textContent = "GAME OVER: IT'S A DRAW!";
+    }
+    resetBtn.style.display = "block";
     
-    }
-    console.log(playGame());
+    resetBtn.addEventListener('click', () => {
+        currentRound = 0;
+        humanScore = 0;
+        computerScore = 0;
+
+        titleHeader.textContent = "PLAY GAME";
+        titleHeader.style.color = "hsl(120, 100%, 50%)";
+        playerScoreEl.textContent = "PLAYER: 0";
+        computerScoreEl.textContent = "COMPUTER: 0";
+        playerIcon.textContent = "";
+        computerIcon.textContent = "";
+
+        resetBtn.style.display = "none";
+    })
+}
+
+    rockButton.addEventListener('click', () => {playRound(choices[0]);});
+    paperButton.addEventListener('click', () => {playRound(choices[1]);});
+    scissorsButton.addEventListener('click', () => {playRound(choices[2]);
+    });

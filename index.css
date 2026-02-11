@@ -1,0 +1,87 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+  margin-block-end: 0;
+}
+
+body {
+  background-color: hsl(0, 0%, 0%); 
+  color: hsl(120, 100%, 50%);      
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  margin: 0;
+}
+
+h1 {
+  line-height: 1.5;
+  text-wrap: balance;
+  animation: arcade-pulse 4s ease-in-out infinite;
+  
+  /* Standard styling to keep it retro */
+  color: hsl(120, 100%, 50%);
+  font-family: 'Press Start 2P', cursive;
+}
+
+.game-container {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.player-icon, .computer-icon {
+  font-size: 80px;
+  display: flex;
+  justify-content: center;
+  text-shadow: 0 0 10px hsl(120, 100%, 50%); 
+}
+
+button {
+  background: transparent;
+  color: hsl(120, 100%, 50%);
+  border: 2px solid hsl(120, 100%, 50%);
+  padding: 10px 20px;
+  font-family: 'Press Start 2P';
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background: hsl(120, 100%, 50%);
+  color: black;
+}
+
+.result-section {
+    padding: 2em;
+}
+
+@keyframes arcade-pulse {
+  0% {
+    opacity: 1;
+    text-shadow: 0 0 10px hsl(120, 100%, 50%), 0 0 20px hsl(120, 100%, 30%);
+  }
+  50% {
+    opacity: 0.5;
+    text-shadow: 0 0 2px hsl(120, 100%, 20%);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 10px hsl(120, 100%, 50%), 0 0 20px hsl(120, 100%, 30%);
+  }
+}
