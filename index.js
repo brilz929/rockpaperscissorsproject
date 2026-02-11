@@ -41,11 +41,11 @@
             titleHeader.textContent = `ROUND ${currentRound}: TIE!`;
         } else if (playerChoice.beats === computerChoice.name) {
             humanScore++;
-            titleHeader.textContent = `ROUND ${currentRound}: You win!`;
+            titleHeader.textContent = `ROUND ${currentRound}: YOU WIN!`;
             playerScoreEl.textContent = `PLAYER: ${humanScore}`;
         } else {
             computerScore++;
-            titleHeader.textContent = `ROUND ${currentRound}: Computer wins!`;
+            titleHeader.textContent = `ROUND ${currentRound}: COMPUTER WINS!`;
             computerScoreEl.textContent = `COMPUTER: ${computerScore}`;
         }
 
